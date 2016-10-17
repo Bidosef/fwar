@@ -1,0 +1,261 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="/static/style/rules.css" media="all" />
+		<link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+		<link rel="icon" type="image/png" href="/static/images/icon.png" />
+		<title>ForumWar</title>
+	</head>
+	<body id="body">
+		<div id="header">
+			<div id="info">
+				<p id="connectes">{{str(len(player_lister.players))}} connectés</p>
+			</div>
+			<div id="imageheader">
+				<a href="/"><img class="header" src="/static/images/header.png"/></a>
+			</div>
+			{% include "logged.html" %} 
+		</div>
+		
+		<div id="main">
+			<div id="Regles">
+				<h1 class="title">Regles</h1>
+				<h2>Les Factions</h2>
+				<p>Il y a dans le jeu deux principales factions : les forumeurs et les modérateurs.<br/>
+					Les forumeurs doivent éliminer tout les modérateurs et les modérateurs doivent éliminer tout les forumeurs.<br/>
+					Toute les nuits a lieu un conseil des modérateurs, ceux-ci vont décider de bannir un forumeur.<br/>
+					La journée, les forumeurs et modérateurs se réunissent pour débattre et signaler le joueur de leurs choix.<br/>
+					Le joueur qui reçoit le plus de signalements se fait bannir.<br/>
+				</p>
+				<h2>Les Roles</h2>
+				<h3>Les forumeurs</h3>
+				<div class="role">
+					<img src="/static/images/roles/forumeurs.png" alt="Forumeur" title="Forumeur" height="50" width="50"/>
+					<p>Un forumeur lambda qui n'a aucun pouvoir particulier.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/multicomptes.png" alt="Multi-compte" title="Multi-compte" height="50" width="50"/>
+					<p>Les multicomptes sont des forumeurs qui peuvent communiquer entre eux la nuit. </p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/aleatoire.png" alt="Aleatoire" title="Aleatoire" height="50" width="50"/>
+					<p>Forumeur dont le rôle est choisis aléatoirement.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/stalker.png" alt="Stalker" title="Stalker" height="50" width="50"/>
+					<p>Le stalkeur peut, aprés chaque conseil des modérateurs, décider de stalker un joueur pour connaître son rôle.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/poucave.png" alt="Poucave" title="Poucave" height="50" width="50"/>
+					<p>La poucave peut, aprés chaque conseil des modérateurs, décider d'accuser un joueur. Celui-ci aura deux signalements en plus contre lui.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/hacker.png" alt="Hacker" title="Hacker" height="50" width="50"/>
+					<p>Le hackeur peut voir les messages des modérateurs la nuits (mais pas leurs pseudo).</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/magenoir.png" alt="Mage Noir" title="Mage Noir" height="50" width="50"/>
+					<p>Le mage noir possède deux pouvoirs qu'il ne peut utiliser qu'une fois au cours de la partie : <br/>
+						Il peut décider de sauver un joueur des banissements des moderateurs et peut décider de tuer un joueur aprés le conseil des modérateurs.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/epop.png" alt="Epop" title="Epop" height="50" width="50"/>
+					<p>L'epop veut absolument se faire remarquer par tout le monde. Ainsi la couleur de ces messages la journée sera differente de celle des autres joueurs</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/folaillon.png" alt="Folaillon" title="Folaillon" height="50" width="50"/>
+					<p>Le folaillon est trés con et inspire la pitié. De ce fait s'il se fait signaler, cela ne sera pas éliminatoire pour lui mais il perdra son droit de signalement.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/reclam.png" alt="Habitué du reclam" title="Habitué du reclam" height="50" width="50"/>
+					<p>La réclam traite les requêtes des joueurs banni, elle ne prête pas d'attention à leurs demande mais peu obtenir des informations qui peuvent être utile de leurs part.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/gomuscu.png" alt="Sec et nerveux" title="Sec et nerveux" height="50" width="50"/>
+					<p>Le sec et nerveux est une personne avec qui il ne faut pas s'embrouiller. Si il se fait bannir, il n'hesitera pas à détruire irl la personne qu'il juge responsable.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/first.png" alt="First sanglant" title="First sanglant" height="50" width="50"/>
+					<p>Le first sanglant peut humilier un joueur tout les 3 tours avec un first sanglant. Le joueur humilié quittera définitivement le forum. S'il s'agit d'un modérateur, celui-ci bannira le first sanglant avant de partir.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/victime.png" alt="Victime" title="Victime" height="50" width="50"/>
+					<p>La victime est un simple forumeur qui se fera bannir sans raison si il y a égalité lors des signalements.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/oldfag.png" alt="Oldfag" title="Oldfag" height="50" width="50"/>
+					<p>Le oldfag peut utiliser son influence pour proteger un joueur de son choix à chaque conseil des moderateurs. Il ne peut pas proteger le même joueur deux fois de suite.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/kikoojap.png" alt="Kikoo jap" title="Kikoo jap" height="50" width="50"/>
+					<p>Si le kikoojap se trouve un coté d'un modérateur, celui-ci lachera un "nya !" en début de journée.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/fantome.png" alt="Forumeur fantome" title="Forumeur fantome" height="50" width="50"/>
+					<p>Le forumeur fantome ne peut pas être banni par les modérateurs tant qu'il n'a pas parlé dans le chat.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/bot.png" alt="Floodeur" title="Floodeur" height="50" width="50"/>
+					<p>Le floodeur peut décider de flooder en journée. S'il fait ca, tout les signalements sont suspendu et un conseil des moderateurs d'urgence est alors organisé. Le floodeur sera ensuite banni par les moderateurs.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/fake.png" alt="Floodeur" title="Fake" height="50" width="50"/>
+					<p>Le fake va pouvoir une fois dans la partie choisir d'usurper le role d'un autre forumeur. Il aura alors les mêmes pouvoir que celui-ci pendant le reste de la partie.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/alpha.png" alt="Alpha" title="Alpha" height="50" width="50"/>
+					<p>L'alpha est un forumeur qui ne peut ni être charmé par l'aw, ni être recruté par les petits bras, ni être promu par un admin</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/boostix.png" alt="Boostix" title="Boostix" height="50" width="50"/>
+					<p>Le boostix va pouvoir décider, une fois durant la partie de faire bannir les deux joueurs les plus signalés (au lieu d'un seul) ainsi que tout ceux qui font égalité avec eux.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/raj.png" alt="Rageux" title="Rageux" height="50" width="50"/>
+					<p>Le signalement du rageux compte double (mais n'est pas visible lors du débat).</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/nuisible.png" alt="Nuisible" title="Nuisible" height="50" width="50"/>
+					<p>Un seul signalement suffit pour bannir le nuisible mais si celui-ci receuille la majorité des signalements, il n'est pas banni.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/bgtimi.png" alt="BG Timide" title="BG Timide" height="50" width="50"/>
+					<p>Durant le conseil, vous pouvez choisir un joueur. Tout vos messages ne sont lisibles que par ce joueur. Si ce joueur meurt, vous pouvez en choisir un autre.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/kolossal.png" alt="Kolossal blagueur" title="Kolossal blagueur" height="50" width="50"/>
+					<p>Le kolossal blagueur peut envoyer une blague à un joueur de son choix aprés chaque conseil, si le joueur choisis est modérateur, alors celui-ci bannira le kolossal blagueur.</p>
+				</div>
+
+				<div class="role">
+					<img src="/static/images/roles/exmod.png" alt="ExMod" title="ExMod" height="50" width="50"/>
+					<p>L'ex-moderateur peut voir les messages des modérateurs (mais pas leur pseudo) et peut aussi leur écrire des messages. L'ex-modérateur ne peut pas se faire bannir par les modérateurs, cependant certains rôles le detecteront comme modérateur (stalker et kikoo-jap).</p>
+				</div>
+				<h3>Modérateurs</h3>
+				<div class="role">
+					<img src="/static/images/roles/moderateurs.png" alt="Moderateur" title="Moderateur" height="50" width="50"/>
+					<p>Simple modérateurs qui peuvent communiquer et bannir un joueur lors du conseil des modérateurs</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/admin.png" alt="Admin" title="Admin" height="50" width="50"/>
+					<p>L'admin est un modérateur qui peut, une seule fois lors de la partie, décider de promouvoir un forumeur en modérateur. Le forumeur promu garde ses pouvoirs mais doit maintenant gagner avec les modérateurs.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/modtyr.png" alt="Modérateur Tyrannique" title="Modérateur Tyrannique" height="50" width="50"/>
+					<p>Le moderateur tyrannique peut décider d'abuser de ces pouvoirs pour bannir un forumeur suplémentaire aprés le conseil. Attention cependant parce que cela ne passera pas innapercu et votre pseudo risque d'être revélé.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/cedric_cire.png" alt="Cédric Ciré" title="Cédric Ciré" height="50" width="50"/>
+					<p>Cédric ciré est un moderateur qui veut gagner seul. Tout les deux tours, il peut eliminer un modérateur.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/exmod.png" alt="SuceBoule" title="SuceBoule" height="50" width="50"/>
+					<p>Le Suce boule est un forumeur qui doit gagner avec les modérateurs. Il connait leurs identité. Le stalker et le kikoo-jap le considére comme un simple forumeur.</p>
+				</div>
+
+				<h3>Autres</h3>
+				<div class="role">
+					<img src="/static/images/roles/troll.png" alt="Troll" title="Troll" height="50" width="50"/>
+					<p>Pour gagner, le troll doit se faire signaler et bannir durant le premier tour. Si celui-ci echoue, il devient un simple forumeur.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/pigeon.png" alt="Pigeon" title="Pigeon" height="50" width="50"/>
+					<p>Le pigeon doit aider le troll a gagner au premier tour. S'il n'y arrive pas il devient par la suite une simple forumeur.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/aw.png" alt="AW" title="AW" height="50" width="50"/>
+					<p>L'AW (Attention Whore) peut charmer deux joueurs par tour. Elle gagne si elle réussit à charmer tout les joueurs sans mourrir.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/wk.png" alt="White Knight" title="White Knight" height="50" width="50"/>
+					<p>Le White Knight doit proteger l'AW pour gagner avec elle.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/summerfag.png" alt="Summer fag" title="Summer Fag" height="50" width="50"/>
+					<p>Le Summer fag a pour but de survivre jusqu'à la fin de la partie. Il peut gagner avec les forumeurs, les moderateurs, troll, AW, etc... du moment qu'il est vivant à la fin de la partie. Il résiste à un banissement des modérateurs.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/ptibras.png" alt="Petit Bras" title="Petit Bras" height="50" width="50"/>
+					<p>Le petit bras peut tout les deux tours convertir un joueur en petit bras. Le joueur garde ses pouvoirs mais peut gagner avec les autres petits bras. Les petits bras gagnent si les seuls survivants sont des petits bras.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/complot.png" alt="Complotiste" title="Complotiste" height="50" width="50"/>
+					<p>Le complotiste peut aprés le conseil des modérateurs, choisir un joueur. Il devra alors faire eliminer ce joueur durant ce tour pour gagner, s'il n'y arrive pas il se suicide.</p>
+				</div>
+				<div class="role">
+					<img src="/static/images/roles/enfantdufo.png" alt="Enfant du Forum" title="Enfant Du Forum" height="50" width="50"/>
+					<p>Doit gagner seul. Chaque nuit il peut éliminer un joueur et il peut survivre à un banissement des modérateurs.</p>
+				</div>
+
+			</div>
+		</div><!--main-->
+		<div id="footer">
+			<button id="top" onclick="foot();">Haut de Page</button>
+		</div>
+
+		<script type="text/javascript">
+		
+		// Global Vars //
+
+		var timeOut; // For ScrollUP //
+
+		// Objects //
+
+		var body = document.getElementById('body');
+		var header = document.getElementById('header');
+		var logo = document.getElementById('imageheader');
+		var connection = document.getElementById('connection');
+		var connectes = document.getElementById('connectes');
+		var footer = document.getElementById('footer');
+
+		var intElemScrollTop = body.scrollTop;
+		
+		// Functions //
+		
+		function foot() { // ScrollUP //
+		  if (document.body.scrollTop!==0 || document.documentElement.scrollTop!==0){
+		    window.scrollBy(0,-42);
+		    timeOut=setTimeout('foot()',25);
+		  }
+		  else clearTimeout(timeOut);
+		}
+
+		function hide(){
+		//	alert('yo');
+			intElemScrollTop = body.scrollTop;
+		//	alert(intElemScrollTop);
+
+			if(intElemScrollTop != 0){
+				// L'utilisateur est descendu //
+					//header//
+					header.style.top = "-50px";
+					connection.style.bottom = "-10px";
+					connectes.style.bottom = "-10px";
+					logo.style.opacity = "0";
+					//footer//
+					footer.style.bottom = "-10px";
+
+			}
+			else{
+				// L'utilisateur est tout en haut //
+					//header//
+					header.style.top = "0px";
+					connection.style.bottom = "18px";
+					connectes.style.bottom = "18px";
+					logo.style.opacity = "1";
+					//footer//
+					footer.style.bottom = "-80px";
+
+			}
+		}
+	
+		// Scroll Event //
+		window.onscroll = function() {hide()};
+		// Touch Event //
+		window.touchmove = function() {hide()};
+		
+		</script>
+	</body>
+</html>

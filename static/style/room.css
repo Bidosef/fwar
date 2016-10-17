@@ -1,0 +1,133 @@
+body{
+	background-color: rgb(137,137,137);
+}
+#content{
+	background-color: white;
+	width: 800px;
+	margin: 0 auto;
+	height: 90vh;
+}
+
+
+#right{
+	width: 150px;
+	float: right;
+}
+#player_list{
+	background-color: rgb(231,231,231);
+}
+
+
+#left{
+	width: 150px;
+	float: left;
+}
+#compo{
+	background-color: rgb(155,200,220);
+}
+
+#edit_compo{
+	background-color: rgb(150,200,0);
+	width: 420px;
+	position: absolute;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+}
+#uniques>div{
+	float:left;
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width : 52px;
+	height: 52px;
+	overflow:hidden;
+}
+
+.simple_block{
+	border-style : solid;
+	border-color : black;
+	border-width: 1px;
+}
+.simple_block:hover{
+	border-style: dashed;
+	border-color : red;
+	border-width: 2px;
+}
+.simple_block_selected{
+	border-style : solid;
+	border-width: 2px;
+	border-color: green;
+}
+
+
+#chat{
+	margin: 0 155px;
+	height: 100%;
+}
+
+#chat_text{
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+	height: 95%;
+	overflow-x: scroll; 
+}
+
+#msg_list>li.mi{
+	color: purple;
+}
+#msg_list>li.mil{
+	color: darkred;
+}
+#msg_list>li.mg{
+	color: lime;
+}
+#msg_list>li.ma{
+	color: blue;
+}
+#msg_list>li.m10{
+	color: black;
+}
+#msg_list>li.m11{
+	color: red;
+}
+#msg_list>li.m12{
+	color: grey;
+}
+#msg_list>li.m13{
+	color: green;
+}
+#msg_list>li.m14{
+	color: orange;
+}
+#msg_list>li.m15{
+	color: lightblue;
+}
+#msg_list>h1{
+	color: darkred;
+}
+.hidden{
+	display: none;
+}
+
+#dead_players{
+	text-decoration: line-through;
+}
+#nb_votes{
+	margin-top: 0px;
+	float: left;
+}
+
+#votes{
+	margin-top: 0px;
+	float: right;
+}
+#votes>li{
+	display: inline-block;
+}
+
+ul{
+	list-style-type: none;
+	padding : 5px;
+}

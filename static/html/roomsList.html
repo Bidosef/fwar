@@ -1,0 +1,126 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="/static/style/room_list.css" media="all" />
+		<link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+		<link rel="icon" type="image/png" href="/static/images/icon.png" />
+		<title>ForumWar</title>
+	</head>
+	<body id="body">
+		<div id="header">
+			<div id="info">
+				<p id="connectes">{{str(len(player_lister.players))}} connectés</p>
+			</div>
+			<div id="imageheader">
+				<img class="header" src="/static/images/header.png"/>
+			</div>
+			{% include "logged.html" %} 
+		</div>
+		<div id="room_creation">
+			<h2 class="creer">Créer une Partie</h2>
+			<form action="/rooms" method="post">
+				<input name="room_name" placeholder="Nom de la Partie ?" type="text"><br>
+				<input value="Créer" class="creer" type="submit">
+			</form>
+		</div>
+		
+		<div id="main">
+			<div id="room_list1">
+				<h2 class="title">Parties en attente de joueurs</h2>
+				<ul id="jeu">
+				    {% for room in rooms %}
+				    {% if not room.playing and not room.finished %}
+				    <li><a href="{{ room.link() }}">{{ room.name }} {{ room.player_count() }}</a></li>
+				    {% end %}
+				    {% end %}
+			    </ul>
+			</div>
+			<div id="room_list2">
+				<h2 class="title">Parties en cours</h2>
+				<ul id="jeu">
+				    {% for room in rooms %}
+				    {% if room.playing %}
+				    <li><a href="{{ room.link() }}">{{ room.name }}</a></li>
+				    {% end %}
+				    {% end %}
+			    </ul>
+			    <h2 class="title">Parties finies</h2>
+				<ul id="jeu">
+			    	{% for room in rooms %}
+			    	{% if room.finished %}
+			    	<li><a href="{{ room.link() }}">{{ room.name }}</a></li>
+			    	{% end %}
+			    	{% end %}
+			    </ul>
+			</div>
+		</div><!--main-->
+		<div id="footer">
+			<button id="top" onclick="foot();">Haut de Page</button>
+		</div>
+
+		<script type="text/javascript">
+		
+		// Global Vars //
+
+		var timeOut; // For ScrollUP //
+
+		// Objects //
+
+		var body = document.getElementById('body');
+		var header = document.getElementById('header');
+		var logo = document.getElementById('imageheader');
+		var connection = document.getElementById('connection');
+		var connectes = document.getElementById('connectes');
+		var footer = document.getElementById('footer');
+
+		var intElemScrollTop = body.scrollTop;
+		
+		// Functions //
+		
+		function foot() { // ScrollUP //
+		  if (document.body.scrollTop!==0 || document.documentElement.scrollTop!==0){
+		    window.scrollBy(0,-42);
+		    timeOut=setTimeout('foot()',25);
+		  }
+		  else clearTimeout(timeOut);
+		}
+
+		function hide(){
+		//	alert('yo');
+			intElemScrollTop = body.scrollTop;
+		//	alert(intElemScrollTop);
+
+			if(intElemScrollTop != 0){
+				// L'utilisateur est descendu //
+					//header//
+					header.style.top = "-50px";
+					connection.style.bottom = "-10px";
+					connectes.style.bottom = "-10px";
+					logo.style.opacity = "0";
+					//footer//
+					footer.style.bottom = "-10px";
+
+			}
+			else{
+				// L'utilisateur est tout en haut //
+					//header//
+					header.style.top = "0px";
+					connection.style.bottom = "18px";
+					connectes.style.bottom = "18px";
+					logo.style.opacity = "1";
+					//footer//
+					footer.style.bottom = "-80px";
+
+			}
+		}
+	
+		// Scroll Event //
+		window.onscroll = function() {hide()};
+		// Touch Event //
+		window.touchmove = function() {hide()};
+		
+		</script>
+	</body>
+</html>

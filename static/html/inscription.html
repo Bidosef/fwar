@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="/static/style/login.css" media="all" />
+		<link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+		<link rel="icon" type="image/png" href="/static/images/icon.png" />
+		<script src="/static/javascript/swfstore.min.js"></script>
+		<script src="/static/javascript/jquery-2.1.4.min.js"></script>
+		<title> Inscription </title>
+	</head>
+	<body>
+		<div id="main">
+			<div id="login">
+				<h2>Inscription</h2>
+				<form action="/inscription" method="post">
+					<input type="text" name="pseudo" placeholder="pseudo"/>
+					<input type="password" name="password" placeholder="password"/>
+					<input id="uid" type="hidden" name="uid" value=""/>
+					<input id="submit" class="creer" type="submit" value="Inscription"/>
+				</form>
+			<div>
+			<div id="error">
+				{% if error == -1%}
+				    <p>Inscription réussite</p>
+				{% elif error == 1%}
+					<p>Caractères interdits</p>
+				{% elif error == 2%}
+					<p>Pseudo déjà pris</p>
+				{% elif error == 3%}
+					<p>Pseudo trop long</p>
+				{% elif error == 4%}
+				    <p>Mot de passe trop court</p>
+				{% end %}
+			</div>
+		</div>
+		<div id="footer">
+			<p id="info">Déjà inscrit ?</p>
+			<button id="top" onclick="location.href='/login'">Connexion</button>
+		</div>
+
+		<script type="text/javascript">
+
+		// vars //
+
+		var info = document.getElementById('info');
+
+		function support(){
+			info.innerHTML = "Cette fonction n'est pas disponible.."
+			setTimeout(temp, 1500);
+			
+		}
+
+		function temp(){
+			info.innerHTML = "La page va se recharger, patientez.."
+			setTimeout(reload, 1000);
+
+		}
+
+		function reload(){
+			document.location.href="login.html" 
+		}
+
+
+		</script>
+	</body>
+</html>

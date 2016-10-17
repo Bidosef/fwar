@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> {{room.name}} </title>
+		<script>
+		    var pseudo = "{{ player.pseudo }}";
+		    var room_id = {{ room.id }};
+		    var creator = {% if creator %} true; {% else %} false; {% end %}
+		    var playing = {% if room.playing %} true; {% else %} false; {% end %}
+		</script>
+		<script src="/static/javascript/jquery-2.1.4.min.js"></script>
+		<script src="/static/javascript/game.js?n=2"></script>
+		<link rel="stylesheet" type="text/css" href="/static/style/room.css">
+	</head>
+	<body>
+		{% include "logged.html" %}
+		<div id="content">
+			{% if creator and not room.playing and not room.finished %}
+			<div id="edit_compo">
+				<button id="close">Fermer</button>
+				<div id="simple">
+					<div class="block">
+						<img src="/static/images/roles/moderateurs.png" alt="Moderateur" title="Moderateur" height="50" width="50"/>
+						<button class="less">-</button>
+						<input id="moderateurs" type="text" value="{{room.nb_modos()}}" disabled/>
+						<button class="add">+</button>
+					</div>
+					<div class="block">
+						<img src="/static/images/roles/forumeurs.png" alt="Forumeur" title="Forumeur" height="50" width="50"/>
+						<button class="less">-</button>
+						<input id="forumeurs" type="text" value="{{room.nb_forumeurs()}}" disabled/>
+						<button class="add">+</button>
+					</div>
+					<div class="block">
+						<img src="/static/images/roles/multicomptes.png" alt="Multi-compte" title="Multi-compte" height="50" width="50"/>
+						<button class="less">-</button>
+						<input id="multicompte" type="text" value="{{room.nb_multicomptes()}}" disabled/>
+						<button class="add">+</button>
+					</div>
+					<div class="block">
+						<img src="/static/images/roles/aleatoire.png" alt="Aleatoire" title="Aleatoire" height="50" width="50"/>
+						<button class="less">-</button>
+						<input id="aleatoire" type="text" value="{{room.nb_aleatoires()}}" disabled/>
+						<button class="add">+</button>
+					</div>
+				</div>
+				<div id="uniques">
+					<div id="stalker" class='{{room.htmlClassForRole("Stalker")}}'>
+						<input type="radio" name="Stalker" class="hidden" /> 
+						<img src="/static/images/roles/stalker.png" alt="Stalker" title="Stalker" height="50" width="50"/>
+					</div>
+					<div id="poucave" class='{{room.htmlClassForRole("Poucave")}}'>
+						<input type="radio" name="Poucave" class="hidden" /> 
+						<img src="/static/images/roles/poucave.png" alt="Poucave" title="Poucave" height="50" width="50"/>
+					</div>
+					<div id="hacker" class='{{room.htmlClassForRole("Hacker")}}'>
+						<input type="radio" name="Hacker" class="hidden" /> 
+						<img src="/static/images/roles/hacker.png" alt="Hacker" title="Hacker" height="50" width="50"/>
+					</div>
+					<div id="magenoir" class='{{room.htmlClassForRole("MageNoir")}}'>
+						<input type="radio" name="MageNoir" class="hidden" /> 
+						<img src="/static/images/roles/magenoir.png" alt="Mage Noir" title="Mage Noir" height="50" width="50"/>
+					</div>
+					<div id="epop" class='{{room.htmlClassForRole("Epop")}}'>
+						<input type="radio" name="Epop" class="hidden" /> 
+						<img src="/static/images/roles/epop.png" alt="Epop" title="Epop" height="50" width="50"/>
+					</div>
+					<div id="folaillon" class='{{room.htmlClassForRole("Folaillon")}}'>
+						<input type="radio" name="Folaillon" class="hidden" /> 
+						<img src="/static/images/roles/folaillon.png" alt="Folaillon" title="Folaillon" height="50" width="50"/>
+					</div>
+					<div id="reclam" class='{{room.htmlClassForRole("Reclam")}}'>
+						<input type="radio" name="Reclam" class="hidden" /> 
+						<img src="/static/images/roles/reclam.png" alt="Habitué du reclam" title="Habitué du reclam" height="50" width="50"/>
+					</div>
+					<div id="sec_et_nerveux" class='{{room.htmlClassForRole("SecEtNerveux")}}'>
+						<input type="radio" name="SecEtNerveux" class="hidden" /> 
+						<img src="/static/images/roles/gomuscu.png" alt="Sec et nerveux" title="Sec et nerveux" height="50" width="50"/>
+					</div>
+					<div id="first_sanglant" class='{{room.htmlClassForRole("First")}}'>
+						<input type="radio" name="First" class="hidden" /> 
+						<img src="/static/images/roles/first.png" alt="First sanglant" title="First sanglant" height="50" width="50"/>
+					</div>
+					<div id="victime" class='{{room.htmlClassForRole("Victime")}}'>
+						<input type="radio" name="Victime" class="hidden" /> 
+						<img src="/static/images/roles/victime.png" alt="Victime" title="Victime" height="50" width="50"/>
+					</div>
+					<div id="oldfag" class='{{room.htmlClassForRole("Oldfag")}}'>
+						<input type="radio" name="Oldfag" class="hidden" /> 
+						<img src="/static/images/roles/oldfag.png" alt="Oldfag" title="Oldfag" height="50" width="50"/>
+					</div>
+					<div id="kikoojap" class='{{room.htmlClassForRole("KikooJap")}}'>
+						<input type="radio" name="KikooJap" class="hidden" /> 
+						<img src="/static/images/roles/kikoojap.png" alt="Kikoo jap" title="Kikoo jap" height="50" width="50"/>
+					</div>
+					<div id="fantome" class='{{room.htmlClassForRole("Fantome")}}'>
+						<input type="radio" name="Fantome" class="hidden" /> 
+						<img src="/static/images/roles/fantome.png" alt="Forumeur fantome" title="Forumeur fantome" height="50" width="50"/>
+					</div>
+					<div id="alpha" class='{{room.htmlClassForRole("Alpha")}}'>
+						<input type="radio" name="Alpha" class="hidden" /> 
+						<img src="/static/images/roles/alpha.png" alt="Alpha" title="Alpha" height="50" width="50"/>
+					</div>
+					<div id="floodeur" class='{{room.htmlClassForRole("Floodeur")}}'>
+						<input type="radio" name="Floodeur" class="hidden" /> 
+						<img src="/static/images/roles/bot.png" alt="Floodeur" title="Floodeur" height="50" width="50"/>
+					</div>
+					<div id="fake" class='{{room.htmlClassForRole("Fake")}}'>
+						<input type="radio" name="Fake" class="hidden" /> 
+						<img src="/static/images/roles/fake.png" alt="Fake" title="Fake" height="50" width="50"/>
+					</div>
+					<div id="boostix" class='{{room.htmlClassForRole("Boostix")}}'>
+						<input type="radio" name="Boostix" class="hidden" /> 
+						<img src="/static/images/roles/boostix.png" alt="Boostix" title="Boostix" height="50" width="50"/>
+					</div>
+					<div id="rageux" class='{{room.htmlClassForRole("Rageux")}}'>
+						<input type="radio" name="Rageux" class="hidden" /> 
+						<img src="/static/images/roles/raj.png" alt="Rageux" title="Rageux" height="50" width="50"/>
+					</div>
+					<div id="nuisible" class='{{room.htmlClassForRole("Nuisible")}}'>
+						<input type="radio" name="Nuisible" class="hidden" /> 
+						<img src="/static/images/roles/nuisible.png" alt="Nuisible" title="Nuisible" height="50" width="50"/>
+					</div>
+					<div id="nuisible" class='{{room.htmlClassForRole("BGTimide")}}'>
+						<input type="radio" name="BGTimide" class="hidden" /> 
+						<img src="/static/images/roles/bgtimi.png" alt="BGTimide" title="BGTimide" height="50" width="50"/>
+					</div>
+					<div id="kolossal" class='{{room.htmlClassForRole("KolossalBlagueur")}}'>
+						<input type="radio" name="KolossalBlagueur" class="hidden" /> 
+						<img src="/static/images/roles/kolossal.png" alt="Kolossal Blagueur" title="Kolossal Blagueur" height="50" width="50"/>
+					</div>
+					<div id="ExMod" class='{{room.htmlClassForRole("ExMod")}}'>
+						<input type="radio" name="ExMod" class="hidden"/>
+						<img src="/static/images/roles/exmod.png" alt="ExMod" title="ExMod" height="50" width="50"/>
+					</div>
+
+					<div id="admin" class='{{room.htmlClassForRole("Admin")}}'>
+						<input type="radio" name="Admin" class="hidden" /> 
+						<img src="/static/images/roles/admin.png" alt="Admin" title="Admin" height="50" width="50"/>
+					</div>
+					<div id="modtyr" class='{{room.htmlClassForRole("ModerateurTyrannique")}}'>
+						<input type="radio" name="ModerateurTyrannique" class="hidden" /> 
+						<img src="/static/images/roles/modtyr.png" alt="Modérateur Tyrannique" title="Modérateur Tyrannique" height="50" width="50"/>
+					</div>
+					<div id="kickeur" class='{{room.htmlClassForRole("Kickeur")}}'>
+						<input type="radio" name="Kickeur" class="hidden" /> 
+						<img src="/static/images/roles/modtyr.png" alt="Kickeur abusif" title="Kickeur abusif" height="50" width="50"/>
+					</div>
+					<div id="cedric" class='{{room.htmlClassForRole("Cedric")}}'>
+						<input type="radio" name="Cedric" class="hidden" /> 
+						<img src="/static/images/roles/cedric_cire.png" alt="Cédric Ciré" title="Cédric Ciré" height="50" width="50"/>
+					</div>
+					<div id="SuceBoule" class='{{room.htmlClassForRole("SuceBoule")}}'>
+						<input type="radio" name="SuceBoule" class="hidden"/>
+						<img src="/static/images/roles/exmod.png" alt="SuceBoule" title="SuceBoule" height="50" width="50"/>
+					</div>
+
+					<div id="troll" class='{{room.htmlClassForRole("Troll")}}'>
+						<input type="radio" name="Troll" class="hidden" /> 
+						<img src="/static/images/roles/troll.png" alt="Troll" title="Troll" height="50" width="50"/>
+					</div>
+					<div id="pigeon" class='{{room.htmlClassForRole("Pigeon")}}'>
+						<input type="radio" name="Pigeon" class="hidden" /> 
+						<img src="/static/images/roles/pigeon.png" alt="Pigeon" title="Pigeon" height="50" width="50"/>
+					</div>
+					<div id="AW" class='{{room.htmlClassForRole("AW")}}'>
+						<input type="radio" name="AW" class="hidden" /> 
+						<img src="/static/images/roles/aw.png" alt="AW" title="AW" height="50" width="50"/>
+					</div>
+					<div id="WK" class='{{room.htmlClassForRole("WhiteKnight")}}'>
+						<input type="radio" name="WhiteKnight" class="hidden" /> 
+						<img src="/static/images/roles/wk.png" alt="White Knight" title="White Knight" height="50" width="50"/>
+					</div>
+					<div id="SummerFag" class='{{room.htmlClassForRole("SummerFag")}}'>
+						<input type="radio" name="SummerFag" class="hidden" /> 
+						<img src="/static/images/roles/summerfag.png" alt="Summer fag" title="Summer Fag" height="50" width="50"/>
+					</div>
+					<div id="PetitBras" class='{{room.htmlClassForRole("PetitBras")}}'>
+						<input type="radio" name="PetitBras" class="hidden" /> 
+						<img src="/static/images/roles/ptibras.png" alt="Petit Bras" title="Petit Bras" height="50" width="50"/>
+					</div>
+					<div id="Complotiste" class='{{room.htmlClassForRole("Complotiste")}}'>
+						<input type="radio" name="Complotiste" class="hidden"/>
+						<img src="/static/images/roles/complot.png" alt="Complotiste" title="Complotiste" height="50" width="50"/>
+					</div>
+					<div id="Enfantduforum" class='{{room.htmlClassForRole("EnfantDuForum")}}'>
+						<input type="radio" name="EnfantDuForum" class="hidden" /> 
+						<img src="/static/images/roles/enfantdufo.png" alt="EnfantDuForum" title="EnfantDuForum" height="50" width="50"/>
+					</div>
+				</div>
+				<button id="confirmation_compo">Confirmer</button>
+			</div>
+			{% end %}
+			<div id="left">
+				<div id="compo">
+					<h3> Composition </h3>
+					<ul>
+						<li>Modérateur(s) : {{room.nb_modos()}}</li>
+						<li>Forumeur(s) : {{room.nb_forumeurs()}}</li>
+						<li>Multicomptes : {{room.nb_multicomptes()}}</li>
+						<li>Aléatoires : {{room.nb_aleatoires()}}</li>
+						{% for role in room.list_roles() %}
+						<li>{{role}}</li>
+						{% end %}
+					</ul>
+				</div>
+				<div id="time">
+					<h3>0</h3>
+				</div>
+				<div id="action">
+					{% if spectator and not room.playing and not room.finished %}
+					<button name="join_button" id="join_button">Rejoindre</button>
+					{% elif creator and not room.playing and not room.finished %}
+					<button name="start_button" id="start_button">Lancer</button>
+					{% end %}
+				</div>
+			</div>
+			<div id="right">
+				<div id="player_list">
+					<h3> Joueurs </h3>
+					<ul id="nb_votes">
+					{% for pl in room.players %}
+					{% if pl.role.name() != "Dead" %}
+						<li class="{{ pl.pseudo }}">0</li>
+					{% end %}
+					{% end %}
+					</ul>
+					<ul id="votes">
+					{% for pl in room.players %}
+					{% if pl.role.name() != "Dead" %}
+						<li class="{{ pl.pseudo }}"></li>
+					{% end %}
+					{% end %}
+					</ul>
+					<ul id="players">
+					{% for pl in room.players %}
+					{% if pl.role.name() != "Dead" %}
+						<li>{{ pl.pseudo }}</li>
+					{% end %}
+					{% end %}
+					</ul>
+					<ul id="dead_players">
+					{% for pl in room.players %}
+					{% if pl.role.name() == "Dead" %}
+						<li>{{ pl.pseudo }}</li>
+					{% end %}
+					{% end %}
+					</ul>
+					<h3> Spectateurs </h3>
+					<ul id="spectators">
+					{% for pl in room.spectators %}
+						<li>{{ pl.pseudo }}</li>
+					{% end %}
+					</ul>
+				</div>
+				<div id="menu">
+					{% if not room.playing or player.role.name() == "Spectateur" or player.role.name() == "Dead" %}
+					<button id="quit">Quitter</button>
+					{% end %}
+				</div>
+			</div>
+			<div id="chat">
+				<div id="chat_text">
+					<ul id="msg_list">
+						{% for elem in room.history %}
+						{% raw elem %}
+						{% end %}
+						<li class="mi">Vous êtes nouveau et vous ne conaissez pas les règles ? Pour savoir comment jouer, c'est <a href="/rules">ici</a> !</li>
+					</ul>
+				</div>
+				<div id="chat_input">
+					<input type="text" id="chat_text_input" name="chat_msg" autocomplete="off" placeholder="Ecrire un message..."/>
+					<button name="chat_button" id="chat_button">Envoyer</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
