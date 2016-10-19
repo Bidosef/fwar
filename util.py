@@ -1,4 +1,4 @@
-# coding: utf-8 
+# coding: utf-8
 import tornado.template
 from Crypto.Cipher import AES
 import base64
@@ -38,8 +38,8 @@ def replace_smiley(text):
 #DB
 passcrypt = "FAsrtdltfFE5rTVrlay6Vtc5"
 
-urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
+#urlparse.uses_netloc.append("postgres")
+#url = urlparse.urlparse(os.environ["DATABASE_URL"])
 
 
 

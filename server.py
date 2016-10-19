@@ -114,9 +114,9 @@ class LoginHandler(tornado.web.RequestHandler):
         pseudo = self.get_argument("pseudo")
         password = self.get_argument("password")
         info = self.get_argument("info")
-        if self.player_lister.find_player(pseudo) != None:
-            self.write(util.read_page("login.html", error = 4))
-            return
+       # if self.player_lister.find_player(pseudo) != None:
+       #     self.write(util.read_page("login.html", error = 4))
+       #     return
         res, t = util.check_player(pseudo, password)
         if res != 0:
             self.write(util.read_page("login.html", error = -res))
