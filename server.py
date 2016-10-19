@@ -118,9 +118,10 @@ class LoginHandler(tornado.web.RequestHandler):
        #     self.write(util.read_page("login.html", error = 4))
        #     return
        # res, t = util.check_player(pseudo, password)
-        if res != 0:
-            self.write(util.read_page("login.html", error = -res))
-            return
+       # if res != 0:
+       #     self.write(util.read_page("login.html", error = -res))
+       #     return
+	   t = 0
         uid = self.get_argument("uid")
         print(uid)
         ip = self.request.headers.get("X-Real-IP") or self.request.remote_ip
