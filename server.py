@@ -1,4 +1,4 @@
-#  coding: utf-8 
+#  coding: utf-8
 
 import os
 import tornado.ioloop
@@ -70,7 +70,7 @@ class RoomHandler(tornado.web.RequestHandler):
         else:
             raise tornado.web.HTTPError(404)
 
-        
+
 class InscriptionHandler(tornado.web.RequestHandler):
     def initialize(self):
         pass
@@ -102,7 +102,7 @@ class LoginHandler(tornado.web.RequestHandler):
         self.player_lister = player_lister
 
     def get(self):
-        if self.get_secure_cookie("user"): 
+        if self.get_secure_cookie("user"):
             if self.player_lister.find_player(self.get_secure_cookie("user")) == None:
                 self.clear_cookie("user")
             else:
@@ -114,6 +114,7 @@ class LoginHandler(tornado.web.RequestHandler):
         pseudo = self.get_argument("pseudo")
         password = self.get_argument("password")
         info = self.get_argument("info")
+		t=0
        # if self.player_lister.find_player(pseudo) != None:
        #     self.write(util.read_page("login.html", error = 4))
        #     return
@@ -121,7 +122,6 @@ class LoginHandler(tornado.web.RequestHandler):
        # if res != 0:
        #     self.write(util.read_page("login.html", error = -res))
        #     return
-		t=0
         uid = self.get_argument("uid")
         print(uid)
         ip = self.request.headers.get("X-Real-IP") or self.request.remote_ip
