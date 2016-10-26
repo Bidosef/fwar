@@ -197,8 +197,8 @@
 					<ul>
 						<li>Modérateur(s) : {{room.nb_modos()}}</li>
 						<li>Forumeur(s) : {{room.nb_forumeurs()}}</li>
-						<li>Multicomptes : {{room.nb_multicomptes()}}</li>
-						<li>Aléatoires : {{room.nb_aleatoires()}}</li>
+						<li>Multicompte(s) : {{room.nb_multicomptes()}}</li>
+						<li>Aléatoire(s) : {{room.nb_aleatoires()}}</li>
 						{% for role in room.list_roles() %}
 						<li>{{role}}</li>
 						{% end %}
@@ -265,7 +265,7 @@
 						{% for elem in room.history %}
 						{% raw elem %}
 						{% end %}
-						<li class="mi">Vous êtes nouveau et vous ne conaissez pas les règles ? Pour savoir comment jouer, c'est <a href="/rules">ici</a> !</li>
+						<li class="mi">Vous êtes nouveau et vous ne connaissez pas les règles ? Pour savoir comment jouer, c'est <a href="/rules">ici</a> !</li>
 					</ul>
 				</div>
 				<div id="chat_input">
